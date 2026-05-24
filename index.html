@@ -7,415 +7,99 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root {
-    --gold: #F5A623;
-    --gold-light: #FFF4E0;
-    --gold-dark: #B8780F;
-    --navy: #0D1B2A;
-    --navy-mid: #1A2F45;
-    --navy-light: #243B55;
-    --white: #FFFFFF;
-    --off-white: #F8F6F1;
-    --gray-100: #F0EDE8;
-    --gray-200: #DDD9D2;
-    --gray-400: #9A9590;
-    --gray-600: #5C5850;
-    --text-primary: #0D1B2A;
-    --text-secondary: #5C5850;
-    --text-muted: #9A9590;
-    --green: #2D7A4F;
-    --green-light: #E8F5EE;
-    --red: #B83232;
-    --red-light: #FBE9E9;
-    --amber: #B8780F;
-    --amber-light: #FFF4E0;
-    --radius: 12px;
-    --radius-sm: 8px;
-  }
-
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--off-white);
-    color: var(--text-primary);
-    min-height: 100vh;
-  }
-
-  /* Header */
-  .header {
-    background: var(--navy);
-    padding: 0 1.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 60px;
-    position: sticky;
-    top: 0;
-    z-index: 100;
-  }
-  .logo {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    text-decoration: none;
-  }
-  .logo-icon {
-    width: 32px;
-    height: 32px;
-    background: var(--gold);
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 16px;
-  }
-  .logo-text {
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--white);
-    letter-spacing: -0.01em;
-  }
-  .logo-sub {
-    font-size: 11px;
-    color: var(--gray-400);
-    font-weight: 400;
-  }
-  .header-date {
-    font-size: 12px;
-    color: var(--gray-400);
-    font-family: 'DM Mono', monospace;
-  }
-
-  /* Nav */
-  .nav {
-    background: var(--white);
-    border-bottom: 1px solid var(--gray-200);
-    padding: 0 1.5rem;
-    display: flex;
-    gap: 0;
-    overflow-x: auto;
-  }
-  .nav-btn {
-    padding: 14px 18px;
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    border: none;
-    background: none;
-    cursor: pointer;
-    border-bottom: 2px solid transparent;
-    white-space: nowrap;
-    transition: all 0.15s;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .nav-btn:hover { color: var(--text-primary); }
-  .nav-btn.active {
-    color: var(--navy);
-    border-bottom-color: var(--gold);
-    font-weight: 600;
-  }
-
-  /* Layout */
-  .main {
-    max-width: 720px;
-    margin: 0 auto;
-    padding: 2rem 1.5rem;
-  }
-
-  .page { display: none; }
-  .page.active { display: block; }
-
-  .page-title {
-    font-size: 24px;
-    font-weight: 600;
-    color: var(--text-primary);
-    margin-bottom: 4px;
-    letter-spacing: -0.02em;
-  }
-  .page-sub {
-    font-size: 14px;
-    color: var(--text-secondary);
-    margin-bottom: 1.75rem;
-    line-height: 1.5;
-  }
-
-  /* Cards */
-  .card {
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: var(--radius);
-    padding: 1.25rem;
-    margin-bottom: 1rem;
-  }
-  .card-title {
-    font-size: 11px;
-    font-weight: 600;
-    color: var(--text-muted);
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 12px;
-  }
-
-  /* Stats */
-  .stats-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-    gap: 10px;
-    margin-bottom: 1.5rem;
-  }
-  .stat-card {
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: var(--radius-sm);
-    padding: 14px 16px;
-  }
-  .stat-label { font-size: 12px; color: var(--text-muted); margin-bottom: 6px; }
-  .stat-val { font-size: 26px; font-weight: 600; color: var(--text-primary); letter-spacing: -0.02em; }
-  .stat-val.gold { color: var(--gold-dark); }
-  .stat-val.green { color: var(--green); }
-  .stat-val.red { color: var(--red); }
-
-  /* Forms */
-  label.field-label {
-    display: block;
-    font-size: 12px;
-    font-weight: 500;
-    color: var(--text-secondary);
-    margin-bottom: 5px;
-  }
-  input[type=text], input[type=date], select, textarea {
-    width: 100%;
-    padding: 9px 12px;
-    font-size: 14px;
-    font-family: 'DM Sans', sans-serif;
-    border: 1px solid var(--gray-200);
-    border-radius: var(--radius-sm);
-    background: var(--off-white);
-    color: var(--text-primary);
-    margin-bottom: 12px;
-    outline: none;
-    transition: border-color 0.15s;
-  }
-  input:focus, select:focus, textarea:focus {
-    border-color: var(--gold);
-    background: var(--white);
-  }
-  textarea { min-height: 72px; resize: vertical; line-height: 1.5; }
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-  .grid3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
-
-  /* Buttons */
-  .btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 10px 18px;
-    font-size: 14px;
-    font-weight: 500;
-    font-family: 'DM Sans', sans-serif;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    transition: all 0.15s;
-    border: none;
-  }
-  .btn-primary {
-    background: var(--navy);
-    color: var(--white);
-    width: 100%;
-    justify-content: center;
-    padding: 12px;
-    font-size: 14px;
-    font-weight: 600;
-  }
-  .btn-primary:hover { background: var(--navy-mid); }
-  .btn-gold {
-    background: var(--gold);
-    color: var(--navy);
-    font-weight: 600;
-  }
-  .btn-gold:hover { background: var(--gold-dark); color: var(--white); }
-  .btn-outline {
-    background: transparent;
-    border: 1px solid var(--gray-200);
-    color: var(--text-secondary);
-    width: 100%;
-    justify-content: center;
-    margin-top: 8px;
-  }
-  .btn-outline:hover { background: var(--gray-100); color: var(--text-primary); }
-
-  /* Badges */
-  .badge {
-    display: inline-block;
-    font-size: 11px;
-    font-weight: 600;
-    padding: 2px 8px;
-    border-radius: 99px;
-    letter-spacing: 0.02em;
-  }
-  .badge-urgent { background: var(--red-light); color: var(--red); }
-  .badge-high { background: var(--amber-light); color: var(--amber); }
-  .badge-normal { background: #EEF2FF; color: #3730A3; }
-  .badge-low { background: var(--gray-100); color: var(--gray-600); }
-  .badge-done { background: var(--green-light); color: var(--green); }
-
-  /* Tasks */
-  .task-item {
-    display: flex;
-    align-items: flex-start;
-    gap: 10px;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--gray-100);
-  }
-  .task-item:last-child { border-bottom: none; }
-  .task-cb {
-    width: 18px;
-    height: 18px;
-    margin-top: 2px;
-    cursor: pointer;
-    accent-color: var(--navy);
-    flex-shrink: 0;
-  }
-  .task-body { flex: 1; min-width: 0; }
-  .task-title { font-size: 14px; color: var(--text-primary); line-height: 1.4; }
-  .task-title.done { text-decoration: line-through; color: var(--text-muted); }
-  .task-meta { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; margin-top: 4px; }
-  .task-meta span { font-size: 12px; color: var(--text-muted); }
-  .task-notes { font-size: 12px; color: var(--text-muted); margin-top: 3px; font-style: italic; }
-  .del-btn {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--gray-400);
-    font-size: 18px;
-    padding: 2px 4px;
-    line-height: 1;
-    flex-shrink: 0;
-  }
-  .del-btn:hover { color: var(--red); }
-
-  /* Category sections */
-  .cat-section { margin-bottom: 1.25rem; }
-  .cat-header {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-  }
-  .cat-icon {
-    width: 28px;
-    height: 28px;
-    border-radius: 8px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 14px;
-  }
-  .cat-name { font-size: 13px; font-weight: 600; color: var(--text-primary); }
-  .cat-count { font-size: 12px; color: var(--text-muted); }
-
-  /* Schedule */
-  .sched-item {
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-    padding: 12px 0;
-    border-bottom: 1px solid var(--gray-100);
-  }
-  .sched-item:last-child { border-bottom: none; }
-  .sched-time {
-    font-size: 12px;
-    color: var(--text-muted);
-    font-family: 'DM Mono', monospace;
-    min-width: 55px;
-    margin-top: 2px;
-  }
-  .sched-content { flex: 1; }
-  .sched-title { font-size: 14px; color: var(--text-primary); font-weight: 500; }
-  .sched-sub { font-size: 12px; color: var(--text-muted); margin-top: 3px; }
-
-  /* AI output */
-  .ai-box {
-    background: var(--navy);
-    border-radius: var(--radius);
-    padding: 1.25rem 1.5rem;
-    margin-top: 1rem;
-    color: var(--white);
-    font-size: 14px;
-    line-height: 1.75;
-    white-space: pre-wrap;
-    font-family: 'DM Sans', sans-serif;
-  }
-  .ai-box .ai-label {
-    font-size: 11px;
-    color: var(--gold);
-    font-weight: 600;
-    text-transform: uppercase;
-    letter-spacing: 0.08em;
-    margin-bottom: 10px;
-  }
-  .loading-box {
-    background: var(--gray-100);
-    border-radius: var(--radius);
-    padding: 1.25rem;
-    margin-top: 1rem;
-    font-size: 14px;
-    color: var(--text-muted);
-    text-align: center;
-    animation: pulse 1.5s ease-in-out infinite;
-  }
-  @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:0.5} }
-
-  /* Empty state */
-  .empty {
-    text-align: center;
-    padding: 3rem 1rem;
-    color: var(--text-muted);
-    font-size: 14px;
-  }
-  .empty .empty-icon { font-size: 32px; margin-bottom: 8px; }
-
-  /* Morning add row */
-  .add-row { display: flex; gap: 8px; align-items: flex-start; }
-  .add-row input { flex: 1; margin-bottom: 0; }
-  .add-row select { width: 130px; margin-bottom: 0; }
-  .add-row .btn { margin-bottom: 0; padding: 9px 14px; flex-shrink: 0; }
-
-  /* Confirmation pills */
-  .confirm-pill {
-    display: inline-flex;
-    align-items: center;
-    gap: 4px;
-    font-size: 12px;
-    background: var(--green-light);
-    color: var(--green);
-    padding: 3px 10px;
-    border-radius: 99px;
-    margin: 3px 3px 0 0;
-    font-weight: 500;
-  }
-
-  @media(max-width: 600px) {
-    .grid2, .grid3 { grid-template-columns: 1fr; }
-    .main { padding: 1.25rem 1rem; }
-    .nav-btn { padding: 12px 12px; font-size: 12px; }
-  }
+:root {
+  --gold:#F5A623;--gold-light:#FFF4E0;--gold-dark:#B8780F;
+  --navy:#0D1B2A;--navy-mid:#1A2F45;
+  --white:#FFFFFF;--off-white:#F8F6F1;
+  --gray-100:#F0EDE8;--gray-200:#DDD9D2;--gray-400:#9A9590;--gray-600:#5C5850;
+  --text-primary:#0D1B2A;--text-secondary:#5C5850;--text-muted:#9A9590;
+  --green:#2D7A4F;--green-light:#E8F5EE;
+  --red:#B83232;--red-light:#FBE9E9;
+  --amber:#B8780F;--amber-light:#FFF4E0;
+  --radius:12px;--radius-sm:8px;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'DM Sans',sans-serif;background:var(--off-white);color:var(--text-primary);min-height:100vh;}
+.header{background:var(--navy);padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:60px;position:sticky;top:0;z-index:100;}
+.logo{display:flex;align-items:center;gap:10px;}
+.logo-icon{width:32px;height:32px;background:var(--gold);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:16px;}
+.logo-text{font-size:15px;font-weight:600;color:var(--white);}
+.logo-sub{font-size:11px;color:var(--gray-400);}
+.header-date{font-size:12px;color:var(--gray-400);font-family:'DM Mono',monospace;}
+.nav{background:var(--white);border-bottom:1px solid var(--gray-200);padding:0 1.5rem;display:flex;overflow-x:auto;}
+.nav-btn{padding:14px 16px;font-size:13px;font-weight:500;color:var(--text-secondary);border:none;background:none;cursor:pointer;border-bottom:2px solid transparent;white-space:nowrap;font-family:'DM Sans',sans-serif;}
+.nav-btn.active{color:var(--navy);border-bottom-color:var(--gold);font-weight:600;}
+.main{max-width:720px;margin:0 auto;padding:2rem 1.5rem;}
+.page{display:none;}.page.active{display:block;}
+.page-title{font-size:24px;font-weight:600;color:var(--text-primary);margin-bottom:4px;letter-spacing:-0.02em;}
+.page-sub{font-size:14px;color:var(--text-secondary);margin-bottom:1.75rem;line-height:1.5;}
+.card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius);padding:1.25rem;margin-bottom:1rem;}
+.card-title{font-size:11px;font-weight:600;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px;}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(130px,1fr));gap:10px;margin-bottom:1.5rem;}
+.stat-card{background:var(--white);border:1px solid var(--gray-200);border-radius:var(--radius-sm);padding:14px 16px;}
+.stat-label{font-size:12px;color:var(--text-muted);margin-bottom:6px;}
+.stat-val{font-size:26px;font-weight:600;color:var(--text-primary);letter-spacing:-0.02em;}
+.stat-val.gold{color:var(--gold-dark);}.stat-val.green{color:var(--green);}.stat-val.red{color:var(--red);}
+label.field-label{display:block;font-size:12px;font-weight:500;color:var(--text-secondary);margin-bottom:5px;}
+input[type=text],input[type=date],select,textarea{width:100%;padding:9px 12px;font-size:14px;font-family:'DM Sans',sans-serif;border:1px solid var(--gray-200);border-radius:var(--radius-sm);background:var(--off-white);color:var(--text-primary);margin-bottom:12px;outline:none;transition:border-color 0.15s;}
+input:focus,select:focus,textarea:focus{border-color:var(--gold);background:var(--white);}
+textarea{min-height:72px;resize:vertical;line-height:1.5;}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+.grid3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;}
+.btn{display:inline-flex;align-items:center;gap:6px;padding:10px 18px;font-size:14px;font-weight:500;font-family:'DM Sans',sans-serif;border-radius:var(--radius-sm);cursor:pointer;border:none;}
+.btn-primary{background:var(--navy);color:var(--white);width:100%;justify-content:center;padding:12px;font-weight:600;}
+.btn-primary:hover{background:var(--navy-mid);}
+.btn-gold{background:var(--gold);color:var(--navy);font-weight:600;}
+.btn-gold:hover{background:var(--gold-dark);color:var(--white);}
+.btn-outline{background:transparent;border:1px solid var(--gray-200);color:var(--text-secondary);width:100%;justify-content:center;margin-top:8px;}
+.btn-outline:hover{background:var(--gray-100);color:var(--text-primary);}
+.badge{display:inline-block;font-size:11px;font-weight:600;padding:2px 8px;border-radius:99px;}
+.badge-urgent{background:var(--red-light);color:var(--red);}
+.badge-high{background:var(--amber-light);color:var(--amber);}
+.badge-normal{background:#EEF2FF;color:#3730A3;}
+.badge-low{background:var(--gray-100);color:var(--gray-600);}
+.task-item{display:flex;align-items:flex-start;gap:10px;padding:12px 0;border-bottom:1px solid var(--gray-100);}
+.task-item:last-child{border-bottom:none;}
+.task-cb{width:18px;height:18px;margin-top:2px;cursor:pointer;accent-color:var(--navy);flex-shrink:0;}
+.task-body{flex:1;min-width:0;}
+.task-title{font-size:14px;color:var(--text-primary);line-height:1.4;}
+.task-title.done{text-decoration:line-through;color:var(--text-muted);}
+.task-meta{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-top:4px;}
+.task-meta span{font-size:12px;color:var(--text-muted);}
+.task-notes{font-size:12px;color:var(--text-muted);margin-top:3px;font-style:italic;}
+.del-btn{background:none;border:none;cursor:pointer;color:var(--gray-400);font-size:18px;padding:2px 4px;line-height:1;flex-shrink:0;}
+.del-btn:hover{color:var(--red);}
+.cat-section{margin-bottom:1.25rem;}
+.cat-header{display:flex;align-items:center;gap:8px;margin-bottom:8px;}
+.cat-icon{width:28px;height:28px;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:14px;}
+.cat-name{font-size:13px;font-weight:600;color:var(--text-primary);}
+.cat-count{font-size:12px;color:var(--text-muted);}
+.sched-item{display:flex;gap:14px;align-items:flex-start;padding:12px 0;border-bottom:1px solid var(--gray-100);}
+.sched-item:last-child{border-bottom:none;}
+.sched-time{font-size:12px;color:var(--text-muted);font-family:'DM Mono',monospace;min-width:55px;margin-top:2px;}
+.sched-content{flex:1;}
+.sched-title{font-size:14px;color:var(--text-primary);font-weight:500;}
+.sched-sub{font-size:12px;color:var(--text-muted);margin-top:3px;}
+.ai-box{background:var(--navy);border-radius:var(--radius);padding:1.25rem 1.5rem;margin-top:1rem;color:var(--white);font-size:14px;line-height:1.75;white-space:pre-wrap;}
+.ai-label{font-size:11px;color:var(--gold);font-weight:600;text-transform:uppercase;letter-spacing:0.08em;margin-bottom:10px;}
+.loading-box{background:var(--gray-100);border-radius:var(--radius);padding:1.25rem;margin-top:1rem;font-size:14px;color:var(--text-muted);text-align:center;animation:pulse 1.5s ease-in-out infinite;}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:0.5}}
+.empty{text-align:center;padding:3rem 1rem;color:var(--text-muted);font-size:14px;}
+.add-row{display:flex;gap:8px;align-items:flex-start;}
+.add-row input{flex:1;margin-bottom:0;}
+.add-row select{width:130px;margin-bottom:0;}
+.confirm-pill{display:inline-flex;align-items:center;gap:4px;font-size:12px;background:var(--green-light);color:var(--green);padding:3px 10px;border-radius:99px;margin:3px 3px 0 0;font-weight:500;}
+@media(max-width:600px){.grid2,.grid3{grid-template-columns:1fr;}.main{padding:1.25rem 1rem;}}
 </style>
 </head>
 <body>
-
 <div class="header">
   <div class="logo">
     <div class="logo-icon">💡</div>
-    <div>
-      <div class="logo-text">Glo Geeks Denver</div>
-      <div class="logo-sub">PJ's Command Center</div>
-    </div>
+    <div><div class="logo-text">Glo Geeks Denver</div><div class="logo-sub">PJ's Command Center</div></div>
   </div>
   <div class="header-date" id="header-date"></div>
 </div>
-
 <nav class="nav">
   <button class="nav-btn active" onclick="showPage('setup')" id="nav-setup">Setup</button>
   <button class="nav-btn" onclick="showPage('morning')" id="nav-morning">☀️ Morning</button>
@@ -423,50 +107,42 @@
   <button class="nav-btn" onclick="showPage('tasks')" id="nav-tasks">All tasks</button>
   <button class="nav-btn" onclick="showPage('evening')" id="nav-evening">🌙 Evening</button>
 </nav>
-
 <main class="main">
 
   <!-- SETUP -->
   <div id="page-setup" class="page active">
-    <p class="page-title">First-time setup</p>
-    <p class="page-sub">Tell me everything on your plate — business and personal. Be as detailed as you want. The more you share, the better I can organize your days.</p>
-
+    <p class="page-title">Welcome, PJ!</p>
+    <p class="page-sub">Tell me everything on your plate. The more detail, the better I can organize your days.</p>
     <div class="card">
       <p class="card-title">🔧 Jobs & installs</p>
-      <label class="field-label">Upcoming jobs, scheduled installs, quotes to give</label>
-      <textarea id="s-jobs" placeholder="E.g. Holiday lighting install for the Johnsons on June 5th, give a quote to the Smith residence on Maple Ave, follow up with the Garcias about the roofline quote..."></textarea>
+      <label class="field-label">Upcoming jobs, installs, quotes to give</label>
+      <textarea id="s-jobs" placeholder="E.g. Holiday lighting install for the Johnsons on June 5th, quote for Smith residence..."></textarea>
     </div>
-
     <div class="card">
       <p class="card-title">📞 Client follow-ups</p>
       <label class="field-label">People who need a call, email, or response</label>
-      <textarea id="s-followups" placeholder="E.g. Call Mike back about his permanent lighting quote, email Sarah about rescheduling, text the new lead from Tuesday..."></textarea>
+      <textarea id="s-followups" placeholder="E.g. Call Mike back about his roofline quote, email Sarah about rescheduling..."></textarea>
     </div>
-
     <div class="card">
       <p class="card-title">🚪 Door-to-door sales</p>
-      <label class="field-label">Sales prep, neighborhoods to target, training plans</label>
-      <textarea id="s-sales" placeholder="E.g. Practice my pitch, map out Cherry Creek neighborhood, create a door-to-door script, plan to train 2 new team members in July..."></textarea>
+      <label class="field-label">Sales prep, neighborhoods to target, training</label>
+      <textarea id="s-sales" placeholder="E.g. Practice pitch, map out Cherry Creek neighborhood, create door-to-door script..."></textarea>
     </div>
-
     <div class="card">
       <p class="card-title">📋 Business admin</p>
-      <label class="field-label">Paperwork, Jobber updates, invoices, presentations, supplies</label>
-      <textarea id="s-admin" placeholder="E.g. Update client records in Jobber, send 3 pending invoices, create a sales presentation, order more wire clips, renew business insurance..."></textarea>
+      <label class="field-label">Jobber updates, invoices, presentations, supplies</label>
+      <textarea id="s-admin" placeholder="E.g. Update Jobber, send invoices, create sales presentation, order supplies..."></textarea>
     </div>
-
     <div class="card">
-      <p class="card-title">🏠 Home projects (incomplete)</p>
+      <p class="card-title">🏠 Home projects</p>
       <label class="field-label">Everything sitting unfinished at home</label>
-      <textarea id="s-home" placeholder="E.g. Fix the back fence, finish painting the garage door, clean out the basement, repair the kitchen faucet, organize the storage unit..."></textarea>
+      <textarea id="s-home" placeholder="E.g. Fix back fence, finish painting garage, clean out basement..."></textarea>
     </div>
-
     <div class="card">
       <p class="card-title">✏️ Everything else</p>
-      <label class="field-label">Errands, personal tasks, things you keep forgetting, random to-dos</label>
-      <textarea id="s-other" placeholder="Anything else on your mind — no matter how small..."></textarea>
+      <label class="field-label">Errands, personal tasks, anything on your mind</label>
+      <textarea id="s-other" placeholder="Anything at all — no matter how small..."></textarea>
     </div>
-
     <button class="btn btn-primary" onclick="runSetup()">✨ Build my master plan</button>
     <div id="setup-output"></div>
   </div>
@@ -475,40 +151,30 @@
   <div id="page-morning" class="page">
     <p class="page-title" id="morning-title">Good morning, PJ!</p>
     <p class="page-sub" id="morning-date-sub"></p>
-
     <div class="card">
       <p class="card-title">Anything new since yesterday?</p>
-      <textarea id="m-new" placeholder="New leads, calls you received, things that came up — anything added to your plate since last night..."></textarea>
+      <textarea id="m-new" placeholder="New leads, calls received, things that came up..."></textarea>
     </div>
-
     <div class="card">
       <p class="card-title">⚡ Anything urgent today?</p>
-      <textarea id="m-urgent" placeholder="Something that absolutely must happen today, no exceptions..."></textarea>
+      <textarea id="m-urgent" placeholder="Something that absolutely must happen today..."></textarea>
     </div>
-
     <div class="card">
-      <p class="card-title">Add new tasks for today</p>
+      <p class="card-title">Add new tasks</p>
       <div class="add-row" style="margin-bottom:8px;">
         <input type="text" id="m-task-input" placeholder="Task description..." style="margin-bottom:0;">
         <select id="m-task-cat" style="margin-bottom:0;">
-          <option>Client follow-up</option>
-          <option>Job / install</option>
-          <option>Sales</option>
-          <option>Admin</option>
-          <option>Home project</option>
-          <option>Other</option>
+          <option>Client follow-up</option><option>Job / install</option><option>Sales</option>
+          <option>Admin</option><option>Home project</option><option>Other</option>
         </select>
         <select id="m-task-priority" style="margin-bottom:0;">
-          <option value="urgent">Urgent</option>
-          <option value="high">High</option>
-          <option value="normal" selected>Normal</option>
+          <option value="urgent">Urgent</option><option value="high">High</option><option value="normal" selected>Normal</option>
         </select>
         <button class="btn btn-gold" onclick="addMorningTask()">+ Add</button>
       </div>
       <input type="date" id="m-task-due" style="margin-bottom:0;">
       <div id="m-new-tasks" style="margin-top:8px;"></div>
     </div>
-
     <button class="btn btn-primary" onclick="runMorning()">☀️ Generate today's schedule</button>
     <div id="morning-output"></div>
   </div>
@@ -517,21 +183,15 @@
   <div id="page-schedule" class="page">
     <p class="page-title">Today's schedule</p>
     <p class="page-sub" id="sched-date-sub"></p>
-
     <div class="stats-grid">
-      <div class="stat-card"><p class="stat-label">Remaining today</p><p class="stat-val" id="stat-remaining">0</p></div>
+      <div class="stat-card"><p class="stat-label">Remaining</p><p class="stat-val" id="stat-remaining">0</p></div>
       <div class="stat-card"><p class="stat-label">Urgent</p><p class="stat-val red" id="stat-urgent">0</p></div>
       <div class="stat-card"><p class="stat-label">Completed</p><p class="stat-val green" id="stat-done">0</p></div>
-      <div class="stat-card"><p class="stat-label">Total tasks</p><p class="stat-val gold" id="stat-total">0</p></div>
+      <div class="stat-card"><p class="stat-label">Total</p><p class="stat-val gold" id="stat-total">0</p></div>
     </div>
-
     <div class="card" id="schedule-container">
-      <div class="empty">
-        <div class="empty-icon">📋</div>
-        <p>Complete setup to generate your schedule.</p>
-      </div>
+      <div class="empty"><p>Complete setup to generate your schedule.</p></div>
     </div>
-
     <button class="btn btn-outline" onclick="askScheduleHelp()">Ask Claude for help with today →</button>
     <div id="schedule-ai-output"></div>
   </div>
@@ -539,92 +199,76 @@
   <!-- ALL TASKS -->
   <div id="page-tasks" class="page">
     <p class="page-title">All tasks</p>
-    <p class="page-sub">Every task on PJ's plate, organized by category. Add, check off, or delete anything here.</p>
-
+    <p class="page-sub">Every task organized by category.</p>
     <div class="card">
       <p class="card-title">Add a task</p>
       <div class="grid2">
-        <div>
-          <label class="field-label">Task description</label>
-          <input type="text" id="t-title" placeholder="What needs to get done?">
-        </div>
-        <div>
-          <label class="field-label">Due date</label>
-          <input type="date" id="t-due">
-        </div>
+        <div><label class="field-label">Task</label><input type="text" id="t-title" placeholder="What needs to get done?"></div>
+        <div><label class="field-label">Due date</label><input type="date" id="t-due"></div>
       </div>
       <div class="grid3">
-        <div>
-          <label class="field-label">Category</label>
+        <div><label class="field-label">Category</label>
           <select id="t-cat">
-            <option>Client follow-up</option>
-            <option>Job / install</option>
-            <option>Sales</option>
-            <option>Admin</option>
-            <option>Home project</option>
-            <option>Other</option>
+            <option>Client follow-up</option><option>Job / install</option><option>Sales</option>
+            <option>Admin</option><option>Home project</option><option>Other</option>
           </select>
         </div>
-        <div>
-          <label class="field-label">Priority</label>
+        <div><label class="field-label">Priority</label>
           <select id="t-priority">
-            <option value="urgent">🔴 Urgent</option>
-            <option value="high">🟡 High</option>
-            <option value="normal" selected>🔵 Normal</option>
-            <option value="low">⚪ Low</option>
+            <option value="urgent">Urgent</option><option value="high">High</option>
+            <option value="normal" selected>Normal</option><option value="low">Low</option>
           </select>
         </div>
-        <div>
-          <label class="field-label">Notes (optional)</label>
-          <input type="text" id="t-notes" placeholder="Any extra details...">
-        </div>
+        <div><label class="field-label">Notes</label><input type="text" id="t-notes" placeholder="Optional..."></div>
       </div>
       <button class="btn btn-primary" onclick="addTask()">Add task</button>
     </div>
-
     <div id="tasks-by-category"></div>
-    <button class="btn btn-outline" onclick="askTaskHelp()">Ask Claude to prioritize my tasks →</button>
+    <button class="btn btn-outline" onclick="askTaskHelp()">Ask Claude to prioritize →</button>
     <div id="tasks-ai-output"></div>
   </div>
 
   <!-- EVENING -->
   <div id="page-evening" class="page">
-    <p class="page-title">End of day wrap-up</p>
+    <p class="page-title">End of day</p>
     <p class="page-sub" id="evening-date-sub"></p>
-
     <div class="card">
-      <p class="card-title">✅ What did you accomplish today?</p>
-      <textarea id="e-done" placeholder="Tell me what got done — jobs completed, calls made, doors knocked, tasks finished, clients contacted..."></textarea>
+      <p class="card-title">✅ What did you accomplish?</p>
+      <textarea id="e-done" placeholder="Jobs completed, calls made, doors knocked..."></textarea>
     </div>
-
     <div class="card">
       <p class="card-title">⏭️ What didn't get done?</p>
-      <textarea id="e-missed" placeholder="Things that got pushed back, ran out of time for, or weren't able to finish. It's okay — we'll reschedule."></textarea>
+      <textarea id="e-missed" placeholder="Things pushed back — we'll reschedule them."></textarea>
     </div>
-
     <div class="card">
-      <p class="card-title">📝 Any wins, notes, or new leads?</p>
-      <textarea id="e-notes" placeholder="Good conversations today, new leads from door-to-door, things to remember for tomorrow..."></textarea>
+      <p class="card-title">📝 Wins or notes for tomorrow?</p>
+      <textarea id="e-notes" placeholder="New leads, good conversations, things to remember..."></textarea>
     </div>
-
     <button class="btn btn-primary" onclick="runEvening()">🌙 Wrap up my day</button>
     <div id="evening-output"></div>
   </div>
 
 </main>
-
 <script>
-const ANTHROPIC_KEY = window.ENV_ANTHROPIC_API_KEY || '';
-let tasks = [];
-try { tasks = JSON.parse(localStorage.getItem('gg_tasks') || '[]'); } catch(e) { tasks = []; }
+var tasks = [];
+try { var saved = localStorage.getItem('gg_tasks'); if (saved) { tasks = JSON.parse(saved); } } catch(e) { tasks = []; }
+var ANTHROPIC_KEY = '';
+try { ANTHROPIC_KEY = localStorage.getItem('gg_api_key') || ''; } catch(e) {}
+if (!ANTHROPIC_KEY) {
+  ANTHROPIC_KEY = prompt('Enter your Anthropic API key to activate Claude:') || '';
+  try { if (ANTHROPIC_KEY) localStorage.setItem('gg_api_key', ANTHROPIC_KEY); } catch(e) {}
+}
 
 function saveTasks() {
   try { localStorage.setItem('gg_tasks', JSON.stringify(tasks)); } catch(e) {}
 }
 
 function showPage(p) {
-  document.querySelectorAll('.page').forEach(el => el.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
+  var pages = ['setup','morning','schedule','tasks','evening'];
+  for (var i = 0; i < pages.length; i++) {
+    document.getElementById('page-' + pages[i]).classList.remove('active');
+    document.getElementById('nav-' + pages[i]).classList.remove('active');
+  }
   document.getElementById('page-' + p).classList.add('active');
   document.getElementById('nav-' + p).classList.add('active');
   if (p === 'schedule') renderSchedule();
@@ -632,33 +276,40 @@ function showPage(p) {
 }
 
 function setDates() {
-  const d = new Date();
-  const fmt = d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
-  const short = d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' });
+  var d = new Date();
+  var fmt = d.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric', year:'numeric' });
+  var short = d.toLocaleDateString('en-US', { weekday:'long', month:'long', day:'numeric' });
   document.getElementById('header-date').textContent = short;
-  const hour = d.getHours();
-  const greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
-  if (document.getElementById('morning-title')) document.getElementById('morning-title').textContent = greeting + ', PJ!';
-  ['morning-date-sub', 'sched-date-sub', 'evening-date-sub'].forEach(id => {
-    if (document.getElementById(id)) document.getElementById(id).textContent = fmt;
-  });
+  var hour = d.getHours();
+  var greeting = hour < 12 ? 'Good morning' : hour < 17 ? 'Good afternoon' : 'Good evening';
+  document.getElementById('morning-title').textContent = greeting + ', PJ!';
+  document.getElementById('morning-date-sub').textContent = fmt;
+  document.getElementById('sched-date-sub').textContent = fmt;
+  document.getElementById('evening-date-sub').textContent = fmt;
 }
 
 function priorityBadge(p) {
-  const map = { urgent: 'badge-urgent', high: 'badge-high', normal: 'badge-normal', low: 'badge-low' };
-  const labels = { urgent: 'Urgent', high: 'High', normal: 'Normal', low: 'Low' };
-  return `<span class="badge ${map[p] || 'badge-low'}">${labels[p] || p}</span>`;
+  var map = { urgent:'badge-urgent', high:'badge-high', normal:'badge-normal', low:'badge-low' };
+  var labels = { urgent:'Urgent', high:'High', normal:'Normal', low:'Low' };
+  return '<span class="badge ' + (map[p] || 'badge-low') + '">' + (labels[p] || p) + '</span>';
 }
 
 function catMeta(c) {
-  const icons = { 'Client follow-up': { icon: '📞', color: '#EEF2FF' }, 'Job / install': { icon: '🔧', color: '#E8F5EE' }, 'Sales': { icon: '🚪', color: '#FFF4E0' }, 'Admin': { icon: '📋', color: '#F0EDE8' }, 'Home project': { icon: '🏠', color: '#FBE9E9' }, 'Other': { icon: '✏️', color: '#F0EDE8' } };
-  return icons[c] || { icon: '•', color: '#F0EDE8' };
+  var icons = {
+    'Client follow-up': { icon:'📞', color:'#EEF2FF' },
+    'Job / install': { icon:'🔧', color:'#E8F5EE' },
+    'Sales': { icon:'🚪', color:'#FFF4E0' },
+    'Admin': { icon:'📋', color:'#F0EDE8' },
+    'Home project': { icon:'🏠', color:'#FBE9E9' },
+    'Other': { icon:'✏️', color:'#F0EDE8' }
+  };
+  return icons[c] || { icon:'•', color:'#F0EDE8' };
 }
 
 function addTask(title, cat, priority, due, notes) {
-  const t = title || document.getElementById('t-title').value.trim();
+  var t = title || document.getElementById('t-title').value.trim();
   if (!t) return;
-  const task = {
+  var task = {
     id: Date.now() + Math.random(),
     title: t,
     category: cat || document.getElementById('t-cat').value,
@@ -666,7 +317,7 @@ function addTask(title, cat, priority, due, notes) {
     due: due || document.getElementById('t-due').value,
     notes: notes || document.getElementById('t-notes').value.trim(),
     done: false,
-    added: new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })
+    added: new Date().toLocaleDateString('en-US', { month:'short', day:'numeric' })
   };
   tasks.push(task);
   saveTasks();
@@ -680,164 +331,216 @@ function addTask(title, cat, priority, due, notes) {
 }
 
 function toggleTask(id) {
-  const t = tasks.find(t => t.id === id);
-  if (t) { t.done = !t.done; saveTasks(); renderTasks(); renderSchedule(); }
+  for (var i = 0; i < tasks.length; i++) {
+    if (tasks[i].id === id) { tasks[i].done = !tasks[i].done; break; }
+  }
+  saveTasks();
+  renderTasks();
+  renderSchedule();
 }
 
 function deleteTask(id) {
-  tasks = tasks.filter(t => t.id !== id);
+  var newTasks = [];
+  for (var i = 0; i < tasks.length; i++) {
+    if (tasks[i].id !== id) newTasks.push(tasks[i]);
+  }
+  tasks = newTasks;
   saveTasks();
   renderTasks();
   renderSchedule();
 }
 
 function renderTasks() {
-  const cats = ['Client follow-up', 'Job / install', 'Sales', 'Admin', 'Home project', 'Other'];
-  const container = document.getElementById('tasks-by-category');
-  let html = '';
-  cats.forEach(cat => {
-    const catTasks = tasks.filter(t => t.category === cat);
-    if (!catTasks.length) return;
-    const meta = catMeta(cat);
-    const remaining = catTasks.filter(t => !t.done).length;
-    html += `<div class="cat-section">
-      <div class="cat-header">
-        <div class="cat-icon" style="background:${meta.color}">${meta.icon}</div>
-        <span class="cat-name">${cat}</span>
-        <span class="cat-count">${remaining} remaining</span>
-      </div>
-      <div class="card" style="padding:.75rem 1rem;">`;
-    catTasks.sort((a, b) => ({ urgent: 0, high: 1, normal: 2, low: 3 }[a.priority] - ({ urgent: 0, high: 1, normal: 2, low: 3 }[b.priority]))).forEach(t => {
-      const overdue = t.due && new Date(t.due + 'T12:00:00') < new Date() && !t.done;
-      html += `<div class="task-item">
-        <input type="checkbox" class="task-cb" ${t.done ? 'checked' : ''} onchange="toggleTask(${t.id})" aria-label="Complete task">
-        <div class="task-body">
-          <div class="task-title ${t.done ? 'done' : ''}">${t.title}</div>
-          <div class="task-meta">
-            ${priorityBadge(t.priority)}
-            ${t.due ? `<span style="${overdue ? 'color:#B83232;font-weight:500;' : ''}">📅 ${new Date(t.due + 'T12:00:00').toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}${overdue ? ' (overdue)' : ''}</span>` : ''}
-            <span>Added ${t.added}</span>
-          </div>
-          ${t.notes ? `<div class="task-notes">${t.notes}</div>` : ''}
-        </div>
-        <button class="del-btn" onclick="deleteTask(${t.id})" aria-label="Delete">×</button>
-      </div>`;
+  var cats = ['Client follow-up','Job / install','Sales','Admin','Home project','Other'];
+  var container = document.getElementById('tasks-by-category');
+  var html = '';
+  for (var c = 0; c < cats.length; c++) {
+    var cat = cats[c];
+    var catTasks = [];
+    for (var i = 0; i < tasks.length; i++) {
+      if (tasks[i].category === cat) catTasks.push(tasks[i]);
+    }
+    if (!catTasks.length) continue;
+    var meta = catMeta(cat);
+    var remaining = 0;
+    for (var i = 0; i < catTasks.length; i++) { if (!catTasks[i].done) remaining++; }
+    catTasks.sort(function(a,b) {
+      var o = { urgent:0, high:1, normal:2, low:3 };
+      return (o[a.priority] || 2) - (o[b.priority] || 2);
     });
+    html += '<div class="cat-section"><div class="cat-header">';
+    html += '<div class="cat-icon" style="background:' + meta.color + '">' + meta.icon + '</div>';
+    html += '<span class="cat-name">' + cat + '</span>';
+    html += '<span class="cat-count">' + remaining + ' remaining</span></div>';
+    html += '<div class="card" style="padding:.75rem 1rem;">';
+    for (var i = 0; i < catTasks.length; i++) {
+      var t = catTasks[i];
+      var overdue = t.due && !t.done && new Date(t.due + 'T12:00:00') < new Date();
+      var dateStr = '';
+      if (t.due) {
+        var dateFormatted = new Date(t.due + 'T12:00:00').toLocaleDateString('en-US', { month:'short', day:'numeric' });
+        dateStr = '<span style="' + (overdue ? 'color:#B83232;font-weight:500;' : '') + '">📅 ' + dateFormatted + (overdue ? ' (overdue)' : '') + '</span>';
+      }
+      html += '<div class="task-item">';
+      html += '<input type="checkbox" class="task-cb" ' + (t.done ? 'checked' : '') + ' onchange="toggleTask(' + t.id + ')">';
+      html += '<div class="task-body"><div class="task-title ' + (t.done ? 'done' : '') + '">' + t.title + '</div>';
+      html += '<div class="task-meta">' + priorityBadge(t.priority) + dateStr + '<span>Added ' + t.added + '</span></div>';
+      if (t.notes) html += '<div class="task-notes">' + t.notes + '</div>';
+      html += '</div>';
+      html += '<button class="del-btn" onclick="deleteTask(' + t.id + ')">×</button>';
+      html += '</div>';
+    }
     html += '</div></div>';
-  });
-  container.innerHTML = html || '<div class="empty"><div class="empty-icon">📋</div><p>No tasks yet. Complete setup or add a task above.</p></div>';
+  }
+  if (!html) html = '<div class="empty"><p>No tasks yet. Complete setup or add a task above.</p></div>';
+  container.innerHTML = html;
 }
 
 function renderSchedule() {
-  const remaining = tasks.filter(t => !t.done);
-  const done = tasks.filter(t => t.done);
+  var remaining = [];
+  var done = [];
+  for (var i = 0; i < tasks.length; i++) {
+    if (tasks[i].done) done.push(tasks[i]);
+    else remaining.push(tasks[i]);
+  }
+  var urgent = 0;
+  for (var i = 0; i < remaining.length; i++) { if (remaining[i].priority === 'urgent') urgent++; }
   document.getElementById('stat-remaining').textContent = remaining.length;
-  document.getElementById('stat-urgent').textContent = remaining.filter(t => t.priority === 'urgent').length;
+  document.getElementById('stat-urgent').textContent = urgent;
   document.getElementById('stat-done').textContent = done.length;
   document.getElementById('stat-total').textContent = tasks.length;
 
   if (!remaining.length) {
-    document.getElementById('schedule-container').innerHTML = '<div class="empty"><div class="empty-icon">🎉</div><p>All done! Complete setup to get started.</p></div>';
+    document.getElementById('schedule-container').innerHTML = '<div class="empty"><p>All done! Or complete setup to get started.</p></div>';
     return;
   }
 
-  const times = ['6:00 AM', '6:30 AM', '7:00 AM', '7:30 AM', '8:00 AM', '9:00 AM', '10:00 AM', '11:00 AM', '12:00 PM', '1:00 PM', '2:00 PM', '3:00 PM', '4:00 PM', '5:00 PM', '6:00 PM'];
-  const ordered = [...remaining.filter(t => t.priority === 'urgent'), ...remaining.filter(t => t.priority === 'high'), ...remaining.filter(t => t.priority === 'normal'), ...remaining.filter(t => t.priority === 'low')];
-  let html = '';
-  ordered.forEach((t, i) => {
-    const meta = catMeta(t.category);
-    html += `<div class="sched-item">
-      <span class="sched-time">${times[i] || ''}</span>
-      <div class="sched-content">
-        <div class="sched-title">${meta.icon} ${t.title}</div>
-        <div class="sched-sub">${t.category} · ${priorityBadge(t.priority)}</div>
-      </div>
-      <input type="checkbox" class="task-cb" ${t.done ? 'checked' : ''} onchange="toggleTask(${t.id})" aria-label="Complete">
-    </div>`;
-  });
+  var times = ['6:00 AM','6:30 AM','7:00 AM','7:30 AM','8:00 AM','9:00 AM','10:00 AM','11:00 AM','12:00 PM','1:00 PM','2:00 PM','3:00 PM','4:00 PM','5:00 PM','6:00 PM'];
+  var ordered = [];
+  for (var i = 0; i < remaining.length; i++) { if (remaining[i].priority === 'urgent') ordered.push(remaining[i]); }
+  for (var i = 0; i < remaining.length; i++) { if (remaining[i].priority === 'high') ordered.push(remaining[i]); }
+  for (var i = 0; i < remaining.length; i++) { if (remaining[i].priority === 'normal') ordered.push(remaining[i]); }
+  for (var i = 0; i < remaining.length; i++) { if (remaining[i].priority === 'low') ordered.push(remaining[i]); }
+
+  var html = '';
+  for (var i = 0; i < ordered.length; i++) {
+    var t = ordered[i];
+    var meta = catMeta(t.category);
+    html += '<div class="sched-item">';
+    html += '<span class="sched-time">' + (times[i] || '') + '</span>';
+    html += '<div class="sched-content"><div class="sched-title">' + meta.icon + ' ' + t.title + '</div>';
+    html += '<div class="sched-sub">' + t.category + ' · ' + priorityBadge(t.priority) + '</div></div>';
+    html += '<input type="checkbox" class="task-cb" ' + (t.done ? 'checked' : '') + ' onchange="toggleTask(' + t.id + ')">';
+    html += '</div>';
+  }
   document.getElementById('schedule-container').innerHTML = html;
 }
 
 async function callClaude(prompt, outputEl) {
   outputEl.innerHTML = '<div class="loading-box">⚡ Claude is thinking...</div>';
   try {
-    const res = await fetch('https://api.anthropic.com/v1/messages', {
+    var res = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json', 'x-api-key': ANTHROPIC_KEY, 'anthropic-version': '2023-06-01', 'anthropic-dangerous-direct-browser-access': 'true' },
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': ANTHROPIC_KEY,
+        'anthropic-version': '2023-06-01',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
       body: JSON.stringify({
         model: 'claude-sonnet-4-20250514',
         max_tokens: 1000,
-        system: 'You are PJ Desrosiers\'s AI business assistant. PJ owns Glo Geeks Denver, an outdoor/holiday/architectural lighting company in Denver, CO. He starts his day at 6am, is great at sales, starting door-to-door sales June 1st, and uses Jobber CRM. Be warm, direct, practical, and encouraging. Write like a smart business coach, not a robot. Use line breaks for readability but avoid excessive bullet points.',
+        system: 'You are PJ Desrosiers\'s AI business assistant. PJ owns Glo Geeks Denver, an outdoor and holiday lighting company in Denver CO. He starts his day at 6am, is great at sales, starting door-to-door sales June 1st, and uses Jobber CRM. Be warm, direct, practical, and encouraging.',
         messages: [{ role: 'user', content: prompt }]
       })
     });
-    const data = await res.json();
+    var data = await res.json();
     if (data.error) throw new Error(data.error.message);
-    const text = data.content.filter(b => b.type === 'text').map(b => b.text).join('\n');
-    outputEl.innerHTML = `<div class="ai-box"><div class="ai-label">✦ Claude's recommendation</div>${text}</div>`;
-  } catch (e) {
-    outputEl.innerHTML = `<div class="ai-box" style="background:var(--red-light);color:var(--red);">Error: ${e.message}. Check that your API key is set correctly in the code.</div>`;
+    var text = '';
+    for (var i = 0; i < data.content.length; i++) {
+      if (data.content[i].type === 'text') text += data.content[i].text;
+    }
+    outputEl.innerHTML = '<div class="ai-box"><div class="ai-label">✦ Claude\'s recommendation</div>' + text + '</div>';
+  } catch(e) {
+    outputEl.innerHTML = '<div class="ai-box" style="background:var(--red-light);color:var(--red);">Error: ' + e.message + '</div>';
   }
 }
 
-async function runSetup() {
-  const jobs = document.getElementById('s-jobs').value;
-  const followups = document.getElementById('s-followups').value;
-  const sales = document.getElementById('s-sales').value;
-  const admin = document.getElementById('s-admin').value;
-  const home = document.getElementById('s-home').value;
-  const other = document.getElementById('s-other').value;
+function runSetup() {
+  var jobs = document.getElementById('s-jobs').value;
+  var followups = document.getElementById('s-followups').value;
+  var sales = document.getElementById('s-sales').value;
+  var admin = document.getElementById('s-admin').value;
+  var home = document.getElementById('s-home').value;
+  var other = document.getElementById('s-other').value;
 
-  if (jobs) jobs.split(/[,\n]+/).map(x => x.trim()).filter(Boolean).forEach(j => addTask(j, 'Job / install', 'high', '', ''));
-  if (followups) followups.split(/[,\n]+/).map(x => x.trim()).filter(Boolean).forEach(f => addTask(f, 'Client follow-up', 'urgent', '', ''));
-  if (sales) sales.split(/[,\n]+/).map(x => x.trim()).filter(Boolean).forEach(s => addTask(s, 'Sales', 'high', '', ''));
-  if (admin) admin.split(/[,\n]+/).map(x => x.trim()).filter(Boolean).forEach(a => addTask(a, 'Admin', 'normal', '', ''));
-  if (home) home.split(/[,\n]+/).map(x => x.trim()).filter(Boolean).forEach(h => addTask(h, 'Home project', 'low', '', ''));
-  if (other) other.split(/[,\n]+/).map(x => x.trim()).filter(Boolean).forEach(o => addTask(o, 'Other', 'normal', '', ''));
+  function splitAdd(text, cat, priority) {
+    if (!text) return;
+    var items = text.split(/[\n,]+/);
+    for (var i = 0; i < items.length; i++) {
+      var item = items[i].trim();
+      if (item) addTask(item, cat, priority, '', '');
+    }
+  }
+  splitAdd(jobs, 'Job / install', 'high');
+  splitAdd(followups, 'Client follow-up', 'urgent');
+  splitAdd(sales, 'Sales', 'high');
+  splitAdd(admin, 'Admin', 'normal');
+  splitAdd(home, 'Home project', 'low');
+  splitAdd(other, 'Other', 'normal');
 
-  const prompt = `PJ just completed his first-time business setup for Glo Geeks. Here is everything on his plate:\n\nJobs/installs: ${jobs || 'none listed'}\nClient follow-ups: ${followups || 'none listed'}\nDoor-to-door sales: ${sales || 'none listed'}\nBusiness admin: ${admin || 'none listed'}\nHome projects: ${home || 'none listed'}\nOther: ${other || 'none listed'}\n\nPlease:\n1. Summarize what you see across all categories\n2. Identify his top 3 most urgent priorities right now\n3. Flag anything that might fall through the cracks\n4. Suggest what his first morning (June 1st) should look like hour by hour\n5. End with one motivating line\n\nBe warm, specific, and actionable.`;
+  var prompt = 'PJ just completed his first-time setup for Glo Geeks. Here is everything on his plate:\n\nJobs/installs: ' + (jobs||'none') + '\nClient follow-ups: ' + (followups||'none') + '\nDoor-to-door sales: ' + (sales||'none') + '\nBusiness admin: ' + (admin||'none') + '\nHome projects: ' + (home||'none') + '\nOther: ' + (other||'none') + '\n\nPlease:\n1. Summarize what you see\n2. Identify his top 3 most urgent priorities\n3. Flag anything that might fall through the cracks\n4. Suggest what his first morning should look like\n5. End with one motivating line.';
 
-  await callClaude(prompt, document.getElementById('setup-output'));
+  callClaude(prompt, document.getElementById('setup-output'));
 }
 
 function addMorningTask() {
-  const title = document.getElementById('m-task-input').value.trim();
+  var title = document.getElementById('m-task-input').value.trim();
   if (!title) return;
   addTask(title, document.getElementById('m-task-cat').value, document.getElementById('m-task-priority').value, document.getElementById('m-task-due').value, '');
   document.getElementById('m-task-input').value = '';
-  const el = document.getElementById('m-new-tasks');
-  el.innerHTML += `<span class="confirm-pill">✓ ${title}</span>`;
+  document.getElementById('m-new-tasks').innerHTML += '<span class="confirm-pill">✓ ' + title + '</span>';
 }
 
-async function runMorning() {
-  const newStuff = document.getElementById('m-new').value;
-  const urgent = document.getElementById('m-urgent').value;
-  const pending = tasks.filter(t => !t.done).slice(0, 12).map(t => `- ${t.title} (${t.category}, ${t.priority})`).join('\n');
-  const prompt = `PJ's morning check-in — ${new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}.\n\nPending tasks:\n${pending || 'Nothing logged yet'}\n\nNew things since yesterday: ${newStuff || 'Nothing new'}\nUrgent today: ${urgent || 'Nothing flagged as urgent'}\n\nPlease build him a practical hour-by-hour schedule starting at 6am. Call out the top 3 must-dos. Note anything to push to tomorrow. End with one quick line to get him fired up. Be concise and direct.`;
-  await callClaude(prompt, document.getElementById('morning-output'));
+function runMorning() {
+  var newStuff = document.getElementById('m-new').value;
+  var urgent = document.getElementById('m-urgent').value;
+  var pendingList = [];
+  for (var i = 0; i < tasks.length; i++) {
+    if (!tasks[i].done) pendingList.push('- ' + tasks[i].title + ' (' + tasks[i].category + ', ' + tasks[i].priority + ')');
+  }
+  var pending = pendingList.slice(0,12).join('\n');
+  var prompt = 'PJ morning check-in - ' + new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}) + '.\n\nPending tasks:\n' + (pending||'None yet') + '\n\nNew things: ' + (newStuff||'Nothing') + '\nUrgent today: ' + (urgent||'Nothing flagged') + '\n\nBuild a practical hour-by-hour schedule starting at 6am. Top 3 must-dos. Anything to push to tomorrow. One motivating line.';
+  callClaude(prompt, document.getElementById('morning-output'));
   renderSchedule();
 }
 
-async function askScheduleHelp() {
-  const pending = tasks.filter(t => !t.done).map(t => `- ${t.title} (${t.category}, ${t.priority})`).join('\n');
-  const prompt = `Here are PJ's pending tasks:\n\n${pending || 'No tasks yet'}\n\nHelp him figure out the smartest way to tackle today. He starts at 6am and plans to do door-to-door sales in the afternoons. What should he do first and why?`;
-  await callClaude(prompt, document.getElementById('schedule-ai-output'));
+function askScheduleHelp() {
+  var pendingList = [];
+  for (var i = 0; i < tasks.length; i++) {
+    if (!tasks[i].done) pendingList.push('- ' + tasks[i].title + ' (' + tasks[i].category + ', ' + tasks[i].priority + ')');
+  }
+  callClaude('PJ pending tasks:\n' + (pendingList.join('\n')||'None') + '\n\nHelp him figure out the smartest way to tackle today. He starts at 6am and does door-to-door in afternoons.', document.getElementById('schedule-ai-output'));
 }
 
-async function askTaskHelp() {
-  const all = tasks.map(t => `- ${t.title} (${t.category}, ${t.priority}, done: ${t.done})`).join('\n');
-  const prompt = `Here is PJ's full task list for Glo Geeks:\n\n${all || 'No tasks yet'}\n\nPlease help him prioritize. What's been sitting too long? What categories need more attention? What should he knock out this week vs next week?`;
-  await callClaude(prompt, document.getElementById('tasks-ai-output'));
+function askTaskHelp() {
+  var allList = [];
+  for (var i = 0; i < tasks.length; i++) {
+    allList.push('- ' + tasks[i].title + ' (' + tasks[i].category + ', ' + tasks[i].priority + ', done: ' + tasks[i].done + ')');
+  }
+  callClaude('PJ full task list:\n' + (allList.join('\n')||'None') + '\n\nHelp him prioritize. What has been sitting too long? What should he do this week vs next week?', document.getElementById('tasks-ai-output'));
 }
 
-async function runEvening() {
-  const done = document.getElementById('e-done').value;
-  const missed = document.getElementById('e-missed').value;
-  const notes = document.getElementById('e-notes').value;
-  const pending = tasks.filter(t => !t.done).slice(0, 8).map(t => `- ${t.title} (${t.category})`).join('\n');
-  const prompt = `PJ's end of day — ${new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric' })}.\n\nAccomplished: ${done || 'Not recorded'}\nMissed: ${missed || 'Nothing missed'}\nWins & notes: ${notes || 'None'}\nStill pending: ${pending || 'Nothing'}\n\nPlease: celebrate what got done, reschedule missed items in priority order for tomorrow, note any patterns, preview tomorrow's top 5 priorities, and close with an encouraging line. Be warm and specific.`;
-  if (missed) missed.split(/[,\n]+/).map(x => x.trim()).filter(x => x && !tasks.find(t => t.title.toLowerCase().includes(x.toLowerCase().substring(0, 8)))).forEach(m => addTask(m, 'Other', 'high', '', `Rolled over from ${new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}`));
-  await callClaude(prompt, document.getElementById('evening-output'));
+function runEvening() {
+  var done = document.getElementById('e-done').value;
+  var missed = document.getElementById('e-missed').value;
+  var notes = document.getElementById('e-notes').value;
+  var pendingList = [];
+  for (var i = 0; i < tasks.length; i++) {
+    if (!tasks[i].done) pendingList.push('- ' + tasks[i].title + ' (' + tasks[i].category + ')');
+  }
+  var prompt = 'PJ end of day - ' + new Date().toLocaleDateString('en-US',{weekday:'long',month:'long',day:'numeric'}) + '.\n\nAccomplished: ' + (done||'Not recorded') + '\nMissed: ' + (missed||'Nothing') + '\nWins/notes: ' + (notes||'None') + '\nStill pending: ' + (pendingList.slice(0,8).join('\n')||'Nothing') + '\n\nCelebrate wins, reschedule missed items, note patterns, preview top 5 for tomorrow, encouraging close.';
+  callClaude(prompt, document.getElementById('evening-output'));
 }
 
 setDates();
