@@ -615,10 +615,11 @@
 
 <script>
 const ANTHROPIC_KEY = window.ENV_ANTHROPIC_API_KEY || '';
-let tasks = JSON.parse(localStorage.getItem('gg_tasks') || '[]');
+let tasks = [];
+try { tasks = JSON.parse(localStorage.getItem('gg_tasks') || '[]'); } catch(e) { tasks = []; }
 
 function saveTasks() {
-  localStorage.setItem('gg_tasks', JSON.stringify(tasks));
+  try { localStorage.setItem('gg_tasks', JSON.stringify(tasks)); } catch(e) {}
 }
 
 function showPage(p) {
