@@ -615,6 +615,7 @@
 
 <script>
 const ANTHROPIC_KEY = window.ENV_ANTHROPIC_API_KEY || '';
+let tasks = JSON.parse(localStorage.getItem('gg_tasks') || '[]');
 
 function saveTasks() {
   localStorage.setItem('gg_tasks', JSON.stringify(tasks));
