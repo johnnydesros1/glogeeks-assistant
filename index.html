@@ -614,7 +614,7 @@
 </main>
 
 <script>
-const ANTHROPIC_KEY = 'PASTE_YOUR_API_KEY_HERE') || '[]');
+const ANTHROPIC_KEY = window.ENV_ANTHROPIC_API_KEY || '';
 
 function saveTasks() {
   localStorage.setItem('gg_tasks', JSON.stringify(tasks));
